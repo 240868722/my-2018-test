@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <!-- 编写一个递归函数查询tree给定节点的祖先链（包含给定节点），要求： 1、要求查出祖先链后函数
+        立即返回，不再继续递归遍历后面的节点 2、函数要有一个参数来指定tree的节点的主键名 3、使用
+        示例代码中的options作为tree结构的参考 -->
+</head>
+<body>
+    <script>
+            const options = [
+                {
+                    id: 'zhejiang',
+                    text: 'Zhejiang',
+                    children: [
+                        {
+                            id: 'hangzhou',
+                            text: 'Hangzhou',
+                            children: [
+                                {
+                                    id: 'xihu',
+                                    text: 'West Lake'
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    id: 'jiangsu',
+                    text: 'Jiangsu',
+                    children: [
+                        {
+                            id: 'nanjing',
+                            text: 'Nanjing',
+                            children: [
+                                {
+                                    id: 'zhonghuamen',
+                                    text: 'Zhong Hua Men'
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ];
+
+
+
+            let menuTreeData = [
+　　{
+　　　　id: 1,
+　　　　fid: 0,
+　　　　name: '1',
+　　　　children: [
+          {
+            id: 11,
+            fid: 1,
+            name: '1-1',
+            children: [
+              { id: 111, fid: 11, name: '1-1-1' },
+              { id: 112, fid: 11, name: '1-1-2' }
+            ]
+          },
+　　　　　　{ id: 12, fid: 1, name: '1-2' }
+　　　　]
+　　},
+　　{ id: 2, fid: 0, name: '2' }
+]
+
+function findAllParent (node, tree, parentNodes = [], index = 0) {
+  if (!node || node.fid === 0) {
+    return
+  }
+  findParent(node, parentNodes, tree)
+  let parentNode = parentNodes[index]
+  findAllParent(parentNode, tree, parentNodes, ++index)
+  return parentNodes
+}
+
+function findParent (node, parentNodes, tree) {
+  for (let i = 0; i < tree.length; i++) {
+    let item = tree[i]
+
+    if (item.id === node.fid) {
+      parentNodes.push(item)
+      return
+    }
+    if (item.children && item.children.length > 0) {
+      findParent(node, parentNodes, item.children)
+    }
+  }
+}
+
+
+
+let nodes = []
+let parentNodes = findAllParent ({fid: 11}, menuTreeData, nodes)
+console.log(parentNodes)
+
+    </script>
+</body>
+</html>

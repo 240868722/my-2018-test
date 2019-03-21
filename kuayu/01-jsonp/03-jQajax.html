@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+</head>
+<body>
+    <script>
+            $.ajax({
+                url: 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=马云&cb=show',//可以不是本地域名 
+                type: 'post',
+                dataType: 'jsonp',  //jsonp格式访问
+                jsonpCallback: 'show'  //获取数据的函数
+            })
+                .done(function (data) {
+                    console.log(data);
+                })
+                .fail(function () {
+                    alert('服务器超时，请重试！');
+                });    
+    </script>
+
+    <script>
+        var xhr =new XMLHttpRequest();
+        xhr.open("GET",'http://localhost:3000/say');
+        xhr.send();
+        xhr.onreadystatechange = function(){
+            if (xhr.readyState==4 && xhr.status==200){
+                console.log(xhr.responseText)
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Parent {
+            constructor(){
+                this.name = '我是爸爸';
+            }
+            eat(){
+                console.log('爸爸吃的方法');
+            }
+        }
+        class Child extends Parent{
+            constructor(){
+                super()
+            }
+        }
+        var c =  new Child()
+        // console.log(c.name);
+        c.eat()
+    </script>
+</body>
+</html>

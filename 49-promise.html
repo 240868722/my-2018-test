@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <script>
+        class Promise{
+            constructor(fn){
+
+                this.status = 'pending';
+                this.value = undefined;
+                this.reason = undefined;
+                const that =this;
+                function resolve(value){
+                    if(that.status === 'pending'){                     
+                        that.status = 'resolved';
+                        that.value = value;
+                    }
+                }
+                function reject(reason){
+                    if(that.status === 'pending'){                      
+                        that.status = 'rejected'
+                        that.reason = reason;
+                    }
+                }
+                fn(resolve,reject);
+                
+
+            }
+           
+            then(a,b){
+               if(this.status ==='resolved'){
+                   a(this.value)
+               }
+               if(this.status==='rejected'){
+                   b(this.reason)
+               }
+            };
+            catch(){}
+        }
+    </script>
+        <script>
+                var p1 = new Promise((resolve,reject)=>{
+                    // resolve('成功');
+                    reject('失败')
+                });
+                p1.then(function(data){console.log(data)},function(res){console.log(res)})
+                
+            </script>
+
+
+
+</body>
+
+</html>

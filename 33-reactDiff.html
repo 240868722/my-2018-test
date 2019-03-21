@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class creat {
+            constructor(type,props,children){
+                this.type = type;
+                this.props = props;
+                this.children = children;
+            }
+        }
+        function attr(node,props,value){
+         
+                switch (key) {
+                    case 'style':
+                    node.style.cssText=value
+                        break;
+                    default:
+                    node.setAttribute(props,value)
+                }               
+            
+        }
+        function render(el){
+            var ele = document.createElement(el.type);
+            for (key in el.props) {
+                attr(ele,key,el.props[key]);
+            }
+            el.children.forEach(child => {
+                child=(child instanceof creat)?render(child):document.createTextNode(child);
+                ele.appendChild(child)
+            });
+          return ele;
+        }
+        function creatElement(type,props,children){
+            return new creat(type,props,children)
+        }
+       var el =  creatElement('ul',{'class':'oUl',style:'width:100px;height:100px;background:red'},[
+               creatElement('li',{'class':'list'},['a']),
+               creatElement('li',{'class':'list'},['b']),
+               creatElement('li',{'class':'list'},['c']),
+        ]          
+        )
+    //   render(el)
+    console.log(render(el))
+      document.body.appendChild(render(el))
+    </script>
+</body>
+</html>

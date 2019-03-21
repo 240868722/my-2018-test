@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>json-query</title>
+
+
+    <script type="text/javascript">
+
+
+
+        const options = [
+            {
+                id: 'zhejiang',
+                text: 'Zhejiang',
+                children: [
+                    {
+                        id: 'hangzhou',
+                        text: 'Hangzhou',
+                        children: [
+                            {
+                                id: 'xihu',
+                                text: 'West Lake'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'jiangsu',
+                text: 'Jiangsu',
+                children: [
+                    {
+                        id: 'nanjing',
+                        text: 'Nanjing',
+                        children: [
+                            {
+                                id: 'zhonghuamen',
+                                text: 'Zhong Hua Men'
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+        var parentNode = null;
+        var node = null;
+
+
+
+        function findAllParent(json, nodeId) {
+            if (!json) {
+                return
+            }
+            getNode(json, nodeId)
+            findAllParent(parentNode, json)
+            return parentNodes
+        }
+
+        function getNode(json, nodeId) {
+
+            for (var i = 0; i < json.length; i++) {
+                if (node) {
+                    break;
+                }
+                var obj = json[i];
+                if (!obj || !obj.id) {
+                    continue;
+                }
+
+                if (obj.id == nodeId) {
+                    node = obj;
+                    break;
+                    return
+
+                } else {
+                    if (obj.children) {
+                        parentNode = (obj.id);
+                        getNode(obj.children, nodeId);
+                    } else {
+                        continue;
+                    }
+                }
+            }
+
+            if (!node) {
+                parentNode = null;
+            }
+
+            return {
+                parentNode: parentNode,
+                node: node
+            };
+        }
+
+
+        var obj = getNode(options, 'xihu');
+
+        console.log(obj)
+    </script>
+</head>
+
+<body>
+</body>
+
+</html>

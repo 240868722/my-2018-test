@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+            Function.prototype.es3Call = function (context) {
+                var content = new Object(context) || window;
+                content.fn = this;
+                console.log(this)
+                var args = [];
+                // arguments是类数组对象，遍历之前需要保存长度，过滤出第一个传参
+                for (var i = 1, len = arguments.length; i < len; i++) {
+                    // 避免object之类传入
+                    args.push('arguments[' + i + ']');
+                }
+                var result = eval('content.fn(' + args + ')');
+                delete content.fn;
+                return result;
+            }
+                function fn1() {
+                    console.log(1);
+                }
+                function fn2() {
+                    console.log(2);
+                }
+
+                // fn1.es3Call();     //输出 1
+
+                fn1.es3Call.es3Call(fn2);  //输出 2
+    </script>
+</body>
+</html>

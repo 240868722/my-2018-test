@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // d 代表0-9数字
+        // D 代表非数字
+        // w 代表0-9A-Za-z和下滑线
+        // W 代表非0-9A-Za-z和下滑线
+        // s 代表空字符
+        // S 代表非空字符
+        // var reg = /\W\d\d\s\d\d\d/;
+        // var qq = reg.test('哇121233');
+        // console.log(qq)
+
+        var reg = /1[3]\d{7}/;
+        var qq = reg.test('163456789');
+        console.log(qq)
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8" />
+<title>3.完成一个React组件，要求点击某元素时，自动计算当前点击元素的位置，并在点击元素的正下方显示一个 div</title>
+<script src="https://cdn.staticfile.org/react/16.4.0/umd/react.development.js"></script>
+<script src="https://cdn.staticfile.org/react-dom/16.4.0/umd/react-dom.development.js"></script>
+<script src="https://cdn.staticfile.org/babel-standalone/6.26.0/babel.min.js"></script>
+</head>
+<style>
+    *{
+        margin:0;
+        padding:0;
+        list-style: none;
+    }
+    li{ 
+        width:50px;
+        height:50px;
+        line-height: 50px;
+        text-align: center;
+        color: #fff;
+    }
+    li:nth-child(1){
+       background: blue;
+       position: fixed;
+       top:80px;
+       left:200px;
+    }
+    li:nth-child(2){
+       background: red;
+       position: fixed;
+       top:180px;
+       left:600px;
+    }
+    li:nth-child(3){
+       background: orange;
+       position: fixed;
+       top:280px;
+       left:830px;
+    }
+    li:nth-child(4){
+       background: green;
+       position: fixed;
+       top:240px;
+       left:300px;
+    }
+    li:nth-child(5){
+       background: darkmagenta;
+       position: fixed;
+       top:340px;
+       left:400px;
+    }
+</style>
+<body>
+    <!-- 完成一个React组件，要求点击某元素时，自动计算当前点击元素的位置，并在点击元素的正下方显示一个 div -->
+<div id="app"></div>
+<script type="text/babel">
+
+function AddBox(props) {
+    const {top,left} = props;
+    return (
+      <div style={{width:50,height:50,background:'skyblue',position:'fixed',top:50+top,left:left}}>
+         
+      </div>
+    );
+}
+
+// class AddBox extends React.Component {
+//     constructor(props) {
+//     super(props);
+
+//   }
+//   render() {
+//     const {top,left} = this.props
+//     return (
+//       <div style={{width:50,height:50,background:'skyblue',position:'fixed',top:50+top,left:left}}>
+         
+//       </div>
+//     );
+//   }
+// }
+
+class Alibaba extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+        data:[1,2,3,4,5],
+        top:'',
+        left:'',
+        isShow:false
+    };
+  }
+
+  getPosition = (event)=>{
+    //   console.log(event.target)
+    //   console.log(event.target.offsetTop+'---'+event.target.offsetLeft)
+    this.setState({
+        top:event.target.offsetTop,
+        left:event.target.offsetLeft,
+        isShow:true
+    })
+  } 
+  render() {
+    return (
+      <div>
+        <ul>
+            {
+                this.state.data.map((item,index)=>{
+                    return <li onClick={this.getPosition}  key={index}>{item}</li>
+                })
+            }
+        </ul>   
+        {this.state.isShow?<AddBox {...this.state}/>:null }
+      </div>
+    );
+  }
+}
+
+ReactDOM.render(  
+  <Alibaba />,
+  document.getElementById('app')
+);
+</script>
+
+</body>
+</html>

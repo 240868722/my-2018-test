@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+  
+    <button id='btn'>跨域请求接口</button>
+    <script>
+        var btn = document.getElementById('btn');
+        //  点击调用接口
+        btn.onclick = function(){            
+            jsonp({
+                // url:'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su',
+                url: 'http://localhost:3000/say',
+                params: { wb: '周杰伦' },
+                cb: 'callBlack'
+            }).then((data) => {
+                console.log('成功:' + data);
+                var div1 = document.createElement('div');
+                div1.innerHTML = data;
+                document.body.appendChild(div1)
+            }).catch((err) => console.log('错误:' + err))
+        }
+        function jsonp({url,params,cb}){
+            return new Promise(function (resolve, reject) {
+                let script = document.createElement('script');
+                window[cb] = function(data){
+                    resolve(data);
+                    document.body.removeChild(script)
+                }
+                // window.baidu = {
+                //     sug: function(res) {
+                //         resolve(res);
+                //         document.body.removeChild(script)
+                //     }
+                // }
+
+                params = { ...params, cb };
+                let arr = [];
+                for (let key in params) {
+                    arr.push(`${key}=${params[key]}`)
+                }
+                
+                script.src = `${url}?${arr.join('&')}`;
+                document.body.appendChild(script);
+
+            })
+
+        
+
+        }
+        
+
+
+    </script>
+    <!-- <script>
+        function callBlack(data) {
+            console.log(data)
+        }
+    </script> -->
+    <!-- <script src="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=马云&cb=callBlack"> -->
+
+    </script> 
+</body>
+</html>

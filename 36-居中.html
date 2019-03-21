@@ -1,0 +1,52 @@
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link href="style.css" rel="stylesheet">
+    <title>让div居中三种方法</title>
+
+    <!-- <style>
+      #box{
+        width:300px;
+        height:200px;
+        border: 1px solid red;
+        display: flex;
+        justify-content: center;
+        /* 让左右子元素居中 */
+        align-items: center;
+      }
+      #childBox{
+        width:100px;
+        height:100px;
+        background: skyblue;
+        /* 让自己居中 */
+        /* align-self: center; */
+      }
+    </style> -->
+        <style>
+          #box {
+            width: 300px;
+            height: 200px;
+            border: 1px solid red;
+            position: relative;
+          }
+        
+          #childBox {
+            width: 100px;
+            height: 100px;
+            background: skyblue;
+            position: absolute;
+            top:50%;
+            left:50%;   
+            transform: translate(-50%,-50%);
+            /* margin-top:-50px;
+            margin-left:-50px; */
+          }
+        </style>
+  </head>
+  <body>
+    <div id='box'>
+      <div id='childBox'></div>
+    </div>
+  </body>
+
+</html>

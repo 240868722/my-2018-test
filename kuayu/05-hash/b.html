@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        function checkHash(){
+            var data = '';
+            //模拟一个简单的参数处理操作
+            switch(location.hash){
+                case '#sayHello':
+                      data = 'HelloWorld';
+                      break;
+                case '#sayHi':
+                      data = 'HiWorld';
+                      break;
+                default : break;
+            }
+            data && callBack('#'+data);
+        }
+        function callBack(hash){
+           var proxy = document.createElement('iframe');
+           proxy.style.display = 'none';
+           proxy.src = 'http://localhost:3000/c.html'+hash;
+           document.body.appendChild(proxy);
+        }
+        window.onload = checkHash;
+        </script>
+
+</body>
+</html>

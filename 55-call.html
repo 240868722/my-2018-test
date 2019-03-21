@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function fn1(){
+        //     console.log(1,this)
+        // }
+        // function fn2(){
+        //     console.log(2,this)
+        // }
+        // fn1.call('hello')
+
+
+        // var obj = {a:1}
+        // obj.fn = function(){
+        //     console.log(this);
+        // }
+        // obj.fn()
+
+        // var obj = {qq:1}
+        // var fn = function(){
+        //     console.log(this);
+        // }
+        // fn.call(obj)
+
+        // var obj = {qq:'马云'}
+        // var args = []
+        // function fn(){
+        //     console.log(this);
+        //     console.log(arguments);
+        //     for(var i=0;i<arguments.length;i++){
+        //         args.push('arguments['+i+']')
+        //     }
+        // }  
+        // fn.call(obj,1,2,3)
+
+            Function.prototype.call2 = function (context) {
+                context = context||window
+                context.fn = this;
+                var args = [];
+                for (var i = 1, len = arguments.length; i < len; i++) {
+                    args.push('arguments[' + i + ']');
+                }
+               var r =  eval('context.fn(' + args + ')');
+                delete context.fn;
+                return r
+            }
+
+            // 测试一下
+                // var obj = {
+                //     value: 1
+                // }
+
+                // function bar(name, age) {
+                //     return {
+                //         value: this.value,
+                //         name: name,
+                //         age: age
+                //     }
+                // }
+
+                // console.log(bar.call2(obj, 'kevin', 18));
+
+                    var value = 1;
+
+                    function bar() {
+                        console.log(this.value);
+                    }
+
+                    bar.call2(null);
+
+     
+    </script>
+</body>
+</html>

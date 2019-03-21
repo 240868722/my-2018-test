@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        class Promise{
+            constructor(fn){
+                this.status = 'pending';
+                this.value = undefined;
+                this.res = undefined;
+                var resolve = (data)=>{
+                    if(this.status ==='pending'){
+                        this.status = 'resolved'
+                        this.value = data;
+                    }
+                    
+                }
+                var reject = (res)=>{
+                    if(this.status ==='pending'){
+                        this.status ='rejected'
+                        this.res = res;
+                    }
+                    
+                }
+                fn(resolve,reject);
+            }
+            then(chenggong,shibai){
+                if(this.status ==='resolved'){
+                    chenggong('我是then成功了')
+                }
+                if(this.status ==='rejected'){
+                    alert(111)
+                    shibai('我是then失败了')
+                }
+            }
+        }
+
+
+       var p =  new Promise((resolve,reject)=>{
+            reject('失败')
+       }).then((data)=>{console.log(data)},(data)=>{console.log(data)})
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const options = [
+            {
+                id: 'zhejiang',
+                text: 'Zhejiang',
+                children: [
+                    {
+                        id: 'hangzhou',
+                        text: 'Hangzhou',
+                        children: [
+                            {
+                                id: 'xihu',
+                                text: 'West Lake'
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                id: 'jiangsu',
+                text: 'Jiangsu',
+                children: [
+                    {
+                        id: 'nanjing',
+                        text: 'Nanjing',
+                        children: [
+                            {
+                                id: 'zhonghuamen',
+                                text: 'Zhong Hua Men'
+                            }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+
+        var parentNode = [];
+        var node = null;
+
+var qq = []
+
+
+
+        var find = function (arr, id) {
+            for (var i = 0; i < arr.length; i++) {
+         
+                if (arr[i].id == id) {
+                    qq.push(arr[i].id)
+                    node = arr[i].id;
+                    return node;
+
+                }
+                else {
+                    if (arr[i].children && arr[i].children.length > 0) {
+                        // if(node){
+                            
+                        //     break;
+                            
+                        // }
+                            parentNode = arr[i].id;
+                            find(arr[i].children, id);
+                            
+                           
+                        
+                       
+                    } else {
+                        //跳出当前递归，返回上层递归
+                        continue;
+                    }
+                }
+            }
+
+
+        }
+
+        var item = find(options, 'zhonghuamen');
+        console.log(parentNode, node,qq)
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,7 @@
+#
+.idea/
+/node_modules
+webpack/node_modules
+kuayu/node_modules
+kuayu/01-jsonp/node_modules
+kuayu/mongoDB/node_modules

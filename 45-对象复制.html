@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>    
+    // 也是浅拷贝
+    var obj= {
+        a:1,
+        b:[1,2,3]
+    }
+                function copyObject(orig) {
+                    var copy = Object.create(Object.getPrototypeOf(orig));
+                    copyOwnPropertiesFrom(copy, orig);
+                    return copy;
+                }
+
+                function copyOwnPropertiesFrom(target, source) {
+                    Object
+                        .getOwnPropertyNames(source)
+                        .forEach(function (propKey) {
+                            var desc = Object.getOwnPropertyDescriptor(source, propKey);
+                            Object.defineProperty(target, propKey, desc);
+                        });
+                    return target;
+                }
+                var newArr = copyObject(obj);
+                newArr.b.push(4,5,5)
+                console.log(obj)
+    </script>
+</body>
+</html>

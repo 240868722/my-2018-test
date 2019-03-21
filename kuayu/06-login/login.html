@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        
+            添加:<br>
+            <input type="text" name="firstname" id='firstname'>
+            <br>
+            <button id='btn'>添加</button>
+            <br>查找:<br>
+            <input type="text" name="reslut" id='reslut'>
+            <br>
+            <button id='search'>查找</button>
+            <div id='box'></div>
+ 
+        <script>
+            var Fvalue = document.getElementById('Fvalue');
+            var reslut = document.getElementById('reslut');
+            var btn = document.getElementById('btn');
+            var search = document.getElementById('search');
+            var box = document.getElementById('box');
+            var firstname = document.getElementById('firstname');
+            btn.onclick = function(){
+                var name = firstname.value;
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', `http://localhost:4000/login?name=${name}`, true);
+              
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {                   
+                        if(JSON.parse(xhr.response).success==='成功'){
+                        //    window.location.href ='https://www.baidu.com'
+                          alert('添加成功')
+                        }else{
+                            alert('添加失败')
+                        }
+                    }
+                }
+                xhr.send()
+
+            };
+            search.onclick = function(){
+                var name = reslut.value;
+                box.innerHTML = ''
+                var oDiv = document.createElement('div');
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', `http://localhost:4000/search?name=${name}`, true);
+                
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState === 4 && xhr.status === 200) {                   
+                        if(JSON.parse(xhr.response).success==='成功'){
+                        //    window.location.href ='https://www.baidu.com'
+                            
+                        JSON.parse(xhr.response).data.map(element => {
+                            oDiv.innerHTML+=`<div>${element.name}</div>`
+                        });
+           
+                             
+                            box.appendChild(oDiv);
+                           
+                        }else{
+                       
+                   
+                            oDiv.innerHTML = '未找到';
+                            box.appendChild(oDiv);
+                        }
+                    }
+                }
+                xhr.send()
+
+            }
+            
+        </script>
+            
+</body>
+</html>

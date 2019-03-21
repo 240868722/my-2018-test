@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>2.a链接点击监听实现</title>
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            list-style: none;
+        }
+        body{
+           margin-top:150px;
+           text-align: center;
+        }
+        h2{ 
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h2>a链接点击监听实现</h2>
+    <div><a href="">a1</a></div>
+    <a href="">a2</a>
+    <ul>
+        <li><a href="">a3</a></li>
+        <li><a href="">a4</a></li>
+    </ul>
+    <div>
+        <div>
+            <a href="">a5</a>
+        </div>
+    </div>
+</body>
+<script>
+    window.onload = function(){
+        var body = document.getElementsByTagName('body')[0];
+        var a = document.getElementsByTagName('a');
+        var m;
+        body.onclick = function (ev) {
+            var ev = ev || window.event;
+            var target = ev.target || ev.srcElement;
+            if (target.nodeName.toLowerCase() == 'a') {
+                m = Math.random();
+                target.setAttribute("href",m);
+                target.innerHTML='已添在a标签上加随机数'+m;
+                return false;         
+            }
+        }
+
+
+    }
+</script>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function Parent(){
+            this.father = '父亲';
+        }
+        Parent.prototype.say = '我是父亲'
+        function Child(){
+            this.son = '儿子';
+            // Parent.call(this)
+        }
+        Child.prototype.eat ='吃'
+        // Child.prototype.__proto__ = Parent.prototype;
+        Child.prototype = Parent.prototype;
+        Parent.prototype.qq ='马云';
+        Child.prototype.qq='马化腾'
+        // Object.setPrototypeOf(Child.prototype,Parent.prototype)
+
+        // Child.prototype = Object.create(Parent.prototype);
+        // Child.prototype = new Parent()
+        var child = new Child();
+        var parent = new Parent();
+        console.log(child.constructor)
+    </script>
+</body>\
+</html>

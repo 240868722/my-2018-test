@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function fn(x){
+        //     console.log(arguments);
+        //     console.log(x)
+        // }
+        // fn(10)
+        // 以上代码展示了在函数体的语句执行之前，arguments变量和函数的参数都已经被赋值。
+        // 从这里可以看出，函数每被调用一次，都会产生一个新的执行上下文环境。因为不同的调
+        // 用可能就会有不同的参数。
+
+            const obj = {
+                b:10,
+        a: function() { console.log(this.b) }    
+    }
+    var f =obj.a;
+    f()
+     obj.a() 
+ 
+    </script>
+</body>
+</html>

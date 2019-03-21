@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var num = 20;
+        // function a(){
+        //     var num = 10;
+        //     return function(){
+        //         alert(num)
+        //     }
+        // }
+        // var fn = a()
+        // fn()
+    //    num未声明会覆盖全局变量
+
+    // var 声明逗号是局部，加分号是全局，不加也是全局
+        var num =10;
+        var c
+        function a(){
+             var a ='123123',
+                 c=666
+             var num = 30;
+            function b(){
+                num=40;
+            }
+           b()
+        }
+        a()
+        alert(num)
+        // alert(c)
+
+
+        // num未声明会影响上一级作用域，如果上一级作用域没有var则影响到更上一级，最后找到全局
+    </script>
+</body>
+</html>

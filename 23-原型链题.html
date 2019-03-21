@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function A(){};
+        function B(){};
+        var a =new A();
+        // a.__proto__=A.prototype;
+        // A.prototype.constructor = A;
+        // 因为a没有constructor属性就去__proto__里面找,a.__proto__=A.prototype, 
+        // 所以a.__proto__.constructor===A.prototype.constructor
+        // console.log(a.__proto__.constructor===A.prototype.constructor) true
+
+        console.log(a.constructor===A); //true
+        console.log(A.prototype.constructor);//A
+        console.log(A.prototype.constructor===A);//true
+        console.log(a.hasOwnProperty('constructor'));//false
+        console.log(a instanceof A) //true
+
+        A.prototype = new B();
+        var b = new A();
+        // A.prototype = b的实例 b的实例里面什么都没有
+        // b.__proto__===A.prototype === B的实例
+        // 因为B的实例里面没有所以往__proto__里面找 B的实例.__proto__.constructor===B.prototype.constructor===B
+        // B的实例.__proto__ === B.prototype; 
+
+        // b.__proto__.__proto__.constructor ===B;
+        // console.log(A.prototype.prototype)
+        // console.log(b.__proto__===A.prototype) //true
+        // console.log(A.prototype)
+
+        // console.log(b.constructor===b.__proto__.constructor) //true
+
+
+        console.log(b.constructor===A);//false
+        console.log(B.prototype.constructor===A);//false
+        console.log(b.constructor.prototype.constructor===A);//false
+        console.log(b.hasOwnProperty('constructor'));//false
+        console.log(b instanceof A)//true
+        console.log(b instanceof B)//true
+    </script>
+</body>
+</html>
